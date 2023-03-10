@@ -1,5 +1,7 @@
 from tkinter import *
 import math
+from PIL import ImageTk, Image
+import os
 
 notesOpen = False #global variable to keep user from opening multiple note windows
   
@@ -95,6 +97,18 @@ def NoteBox2():
     notes.config(menu=notemenubar)
      
 
+# create a splash image at the start of the program that has 2 images to start the program
+image_splash = Tk()
+img = ImageTk.PhotoImage(Image.open("background1.jpg"))#create the bottom image
+image_splash.title("Welcome!")
+image_splash.resizable(width=False, height=False)
+panel = Label(image_splash, image = img, width = 300, height = 250)
+panel.pack(side = "bottom", expand = "yes", fill = "both")
+canvas = Canvas(image_splash, width = 300, height = 200)      
+canvas.pack()      
+img2 = PhotoImage(file="waltercal.png") #create top image     
+canvas.create_image(0,20, anchor=NW, image=img2)  
+
 #This function checks to see if a note window is open before creating one
 def NoteBox():
     global notesOpen #reference global variable
@@ -112,6 +126,7 @@ root.resizable(width=False, height=False)
 root.geometry("480x568")
 calc = Frame(root)
 calc.grid()
+
  
 #This function performs the main calculations for the program
 class Calculator():
@@ -445,6 +460,7 @@ def Standard():
  
 #exits the calculator if you click exit on the menu
 def ExitCalc():
+
     root.destroy()
 
 #creates a menu for the calculator window
